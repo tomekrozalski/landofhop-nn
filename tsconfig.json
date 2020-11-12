@@ -9,7 +9,15 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
-    "incremental": true
+    "incremental": true,
+    "rootDir": ".",
+    "paths": {
+      "utils/*": ["src/utils/*"],
+      "beverage/*": ["src/beverage/*"],
+      "ingredient/*": ["src/ingredient/*"],
+      "language/*": ["src/language/*"],
+      "place/*": ["src/place/*"]
+    }
   },
   "exclude": ["node_modules", "dist"]
 }
