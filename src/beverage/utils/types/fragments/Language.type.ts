@@ -1,6 +1,6 @@
 import { LanguageValue } from 'utils/types';
 
-export type Country = {
+export type Language = {
   code: string;
   id: string;
   name: LanguageValue[];
