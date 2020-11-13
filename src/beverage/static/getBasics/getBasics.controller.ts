@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 
 import { Basics } from 'beverage/utils/types';
 import { GetBasicsService } from './getBasics.service';
@@ -7,9 +7,15 @@ import { GetBasicsService } from './getBasics.service';
 export class GetBasicsController {
   constructor(private readonly beverageService: GetBasicsService) {}
 
-  @Get('basics')
-  async getBasics(): Promise<Basics[]> {
-    const beverages: Basics[] = await this.beverageService.getBasics();
+  @Get('basics/:skip/:limit')
+  async getBasics(
+    @Param('limit') limit,
+    @Param('skip') skip,
+  ): Promise<Basics[]> {
+    const beverages: Basics[] = await this.beverageService.getBasics({
+      limit,
+      skip,
+    });
     return beverages;
   }
 }

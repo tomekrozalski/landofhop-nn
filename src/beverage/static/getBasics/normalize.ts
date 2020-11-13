@@ -1,30 +1,29 @@
-// import { LanguageValue } from 'utils/types';
-// import { Beverage } from 'beverage/utils/types';
-// import {
-//   beverageDetailsNormalizer,
-//   languageIdToCode,
-// } from 'beverage/utils/helpers';
-// import { NormalizedBeverage } from './NormalizedBeverage.type';
+import { Basics } from 'beverage/utils/types';
+import { languageIdToCode } from 'beverage/utils/helpers';
+import { RawData } from './rawData.type';
 
-// /* ---------------------------------------------------
-//  * REGULAR BEVERAGE NORMALIZATION
-//  *
-//  * I use it in Gatsby to prefetch all beverages.
-//  * So language-value arrays are not translated, but
-//  * language id is replaced by language code
-//  */
+const normalize = ({
+  added,
+  badge,
+  brand,
+  container,
+  id,
+  languages,
+  name,
+  photos,
+  shortId,
+}: RawData): Basics => ({
+  id,
+  shortId,
+  badge,
+  brand: {
+    badge: brand.badge,
+    name: languageIdToCode({ languages, values: brand.name }),
+  },
+  name: languageIdToCode({ languages, values: name }),
+  photos,
+  container,
+  added,
+});
 
-// const normalize = (beverage: Beverage): NormalizedBeverage => {
-//   const transformLanguage = ({ values }: { values: LanguageValue[] }) =>
-//     languageIdToCode({
-//       languages: beverage.language,
-//       values,
-//     });
-
-//   const translate = ({ values }: { values: LanguageValue[] }) =>
-//     transformLanguage({ values });
-
-//   return beverageDetailsNormalizer({ beverage, transformLanguage, translate });
-// };
-
-// export default normalize;
+export default normalize;

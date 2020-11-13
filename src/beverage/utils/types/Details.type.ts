@@ -15,7 +15,6 @@ import {
   Ingredient,
   Ingredients,
   Institution,
-  Language,
   Place,
   Price,
 } from './fragments';
@@ -105,5 +104,4 @@ export type Details = {
   };
   added: Date;
   updated?: Date;
-  language: Language[];
 };

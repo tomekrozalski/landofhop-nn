@@ -2,22 +2,23 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { Basics, Details } from 'beverage/utils/types';
-// import normalize from './normalize';
+import { Basics } from 'beverage/utils/types';
+import { RawData } from './rawData.type';
+import normalize from './normalize';
 
 @Injectable()
 export class GetBasicsService {
   constructor(
-    @InjectModel('Beverage') private readonly beverageModel: Model<Details>,
+    @InjectModel('Beverage') private readonly beverageModel: Model<Basics>,
   ) {}
 
-  async getBasics(): Promise<Basics[]> {
-    const rawBeverages: Details[] = await this.beverageModel.getBasics();
+  async getBasics({ limit, skip }): Promise<Basics[]> {
+    const rawBeverages: RawData[] = await this.beverageModel.getBasics({
+      limit,
+      skip,
+    });
+    const formattedBeverages: Basics[] = rawBeverages.map(normalize);
 
-    // const formattedBeverages: Basics[] = rawBeverages.map(beverage =>
-    //   normalize(beverage),
-    // );
-
-    return rawBeverages;
+    return formattedBeverages;
   }
 }

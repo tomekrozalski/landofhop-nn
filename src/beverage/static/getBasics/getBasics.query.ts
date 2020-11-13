@@ -1,29 +1,41 @@
-// import { language } from 'utils/aggregation';
-import { Basics } from 'beverage/utils/types';
-// import { institution, ingredient, place } from 'beverage/utils/aggregation';
-// import { editorial, label, producer } from 'beverage/utils/project';
+import { languages } from 'utils/aggregation';
+import { institution } from 'beverage/utils/aggregation';
+import { RawData } from './rawData.type';
 
-const getBasics = function(): Basics[] {
+const getBasics = function({ limit, skip }): RawData[] {
   return this.aggregate([
-    // ...institution,
-    // ...place,
-    // ...ingredient,
-    // ...language,
+    ...institution,
+    ...languages,
     {
       $project: {
         _id: 0,
         id: '$_id',
         shortId: 1,
         badge: 1,
-        // ...{ label },
-        // ...{ producer },
-        // ...{ editorial },
-        // added: 1,
-        // updated: 1,
-        // language: 1,
+        brand: {
+          badge: '$label.general.brand_info.badge',
+          name: '$label.general.brand_info.name',
+        },
+        name: '$label.general.name',
+        photos: {
+          cover: {
+            height: '$editorial.photos.cover.height',
+            width: '$editorial.photos.cover.width',
+          },
+          outlines: {
+            cover: '$editorial.photos.outlines.cover',
+          },
+        },
+        container: {
+          type: '$label.container.type',
+        },
+        added: 1,
+        languages: 1,
       },
     },
-    // { $sort: { added: -1 } },
+    { $sort: { added: -1 } },
+    { $skip: +skip },
+    { $limit: +limit },
   ]);
 };
 

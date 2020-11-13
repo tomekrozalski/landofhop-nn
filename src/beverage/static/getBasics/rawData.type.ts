@@ -1,7 +1,8 @@
 import { LanguageValue } from 'utils/types';
 import { ContainerType } from 'beverage/utils/enums';
+import { Language } from 'beverage/utils/types/fragments';
 
-export type Basics = {
+export type RawData = {
   id: string;
   shortId: string;
   badge: string;
@@ -23,4 +24,5 @@ export type Basics = {
     type: ContainerType;
   };
   added: Date;
+  languages: Language[];
 };
