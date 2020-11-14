@@ -17,13 +17,18 @@ import BeverageSchema from './utils/schema';
 //   UpdateBeverageController,
 //   UpdateBeverageService,
 // } from './admin';
-import { GetBasicsController, GetBasicsService } from './static';
+import {
+  GetBasicsController,
+  GetBasicsService,
+  GetTotalController,
+  GetTotalService,
+} from './static';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'Beverage', schema: BeverageSchema }]),
   ],
-  controllers: [GetBasicsController],
-  providers: [GetBasicsService],
+  controllers: [GetBasicsController, GetTotalController],
+  providers: [GetBasicsService, GetTotalService],
 })
 export class BeverageModule {}
