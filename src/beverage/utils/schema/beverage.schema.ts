@@ -27,6 +27,7 @@ import producerSchema from './producer';
 
 // Static
 import { getBasicsQuery } from 'beverage/static/getBasics';
+import { getDetailsQuery } from 'beverage/static/getDetails';
 
 // Public
 // import search from 'beverage/public/search/search.query';
@@ -82,6 +83,7 @@ beverageSchema.index({ badge: 1, shortId: 1 }, { unique: true });
 
 // Static
 beverageSchema.statics.getBasics = getBasicsQuery;
+beverageSchema.statics.getDetails = getDetailsQuery;
 
 // Public
 // beverageSchema.statics.search = search;

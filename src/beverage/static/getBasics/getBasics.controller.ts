@@ -7,7 +7,7 @@ import { GetBasicsService } from './getBasics.service';
 export class GetBasicsController {
   constructor(private readonly beverageService: GetBasicsService) {}
 
-  @Get('basics/:skip/:limit')
+  @Get('basics/:skip?/:limit?')
   async getBasics(
     @Param('limit') limit,
     @Param('skip') skip,

@@ -20,6 +20,8 @@ import BeverageSchema from './utils/schema';
 import {
   GetBasicsController,
   GetBasicsService,
+  GetDetailsController,
+  GetDetailsService,
   GetTotalController,
   GetTotalService,
 } from './static';
@@ -28,7 +30,7 @@ import {
   imports: [
     MongooseModule.forFeature([{ name: 'Beverage', schema: BeverageSchema }]),
   ],
-  controllers: [GetBasicsController, GetTotalController],
-  providers: [GetBasicsService, GetTotalService],
+  controllers: [GetBasicsController, GetDetailsController, GetTotalController],
+  providers: [GetBasicsService, GetDetailsService, GetTotalService],
 })
 export class BeverageModule {}

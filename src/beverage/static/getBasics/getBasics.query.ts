@@ -2,7 +2,12 @@ import { languages } from 'utils/aggregation';
 import { institution } from 'beverage/utils/aggregation';
 import { RawData } from './rawData.type';
 
-const getBasics = function({ limit, skip }): RawData[] {
+type Props = {
+  limit?: string;
+  skip?: string;
+};
+
+const getBasics = function({ limit, skip }: Props): RawData[] {
   return this.aggregate([
     ...institution,
     ...languages,
@@ -34,8 +39,8 @@ const getBasics = function({ limit, skip }): RawData[] {
       },
     },
     { $sort: { added: -1 } },
-    { $skip: +skip },
-    { $limit: +limit },
+    ...(skip ? [{ $skip: +skip }] : []),
+    ...(limit ? [{ $limit: +limit }] : []),
   ]);
 };
 

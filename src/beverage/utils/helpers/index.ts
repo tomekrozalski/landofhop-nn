@@ -1,3 +1,4 @@
+import detailsNormalizer from './detailsNormalizer';
 import languageIdToCode from './languageIdToCode';
 
-export { languageIdToCode };
+export { detailsNormalizer, languageIdToCode };
