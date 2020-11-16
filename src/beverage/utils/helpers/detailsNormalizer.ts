@@ -1,14 +1,28 @@
 import { get, isBoolean, isEmpty, isNumber, unset } from 'lodash';
 
+import { LanguageValue } from 'utils/types';
 import { Details, RawData } from 'beverage/utils/types';
+import { Tale } from 'beverage/utils/types/fragments';
+import languageIdToCode from './languageIdToCode';
 
 const detailsNormalizer = ({
   beverage,
-  transformLanguage,
+  transformLanguageIds,
 }: {
   beverage: RawData;
-  transformLanguage: ({ values }: { values: any[] }) => any[];
+  transformLanguageIds: boolean;
 }): Details => {
+  const transformLanguage = (values: LanguageValue[] | Tale[]) => {
+    if (transformLanguageIds) {
+      return languageIdToCode({
+        languages: beverage.languages,
+        values,
+      });
+    }
+
+    return values;
+  };
+
   const label = query => get(beverage, `label.${query}`);
   const producer = query => get(beverage, `producer.${query}`);
   const editorial = query => get(beverage, `editorial.${query}`);
@@ -16,7 +30,7 @@ const detailsNormalizer = ({
   const normalizeBrand = institution => ({
     badge: institution.badge,
     id: institution.id,
-    name: institution.name,
+    name: transformLanguage(institution.name),
     shortId: institution.shortId,
     ...(institution.website && { website: institution.website }),
     ...(institution.consortium && {
@@ -25,13 +39,13 @@ const detailsNormalizer = ({
   });
 
   const normalizePlace = place => ({
-    ...(place.city && { city: place.city }),
+    ...(place.city && { city: transformLanguage(place.city) }),
     ...(place.coordinates && {
       coordinates: place.coordinates.map(item => +item),
     }),
-    country: place.country.name,
+    country: transformLanguage(place.country.name),
     id: place.id,
-    institution: place.institution.name,
+    institution: transformLanguage(place.institution.name),
   });
 
   const normalizeExtract = ({ relate, unit, value }) => ({
@@ -51,13 +65,13 @@ const detailsNormalizer = ({
     id: beverage.id,
     shortId: beverage.shortId,
     badge: beverage.badge,
-    name: transformLanguage({ values: label('general.name') }),
+    name: transformLanguage(label('general.name')),
     series: {
       ...(label('general.series') && {
-        label: transformLanguage({ values: label('general.series') }),
+        label: transformLanguage(label('general.series')),
       }),
       ...(producer('general.series') && {
-        producer: transformLanguage({ values: producer('general.series') }),
+        producer: transformLanguage(producer('general.series')),
       }),
     },
     brand: normalizeBrand(label('general.brand')),
@@ -107,18 +121,18 @@ const detailsNormalizer = ({
     },
     remark: {
       ...(label('general.remark') && {
-        label: label('general.remark'),
+        label: transformLanguage(label('general.remark')),
       }),
       ...(producer('general.remark') && {
-        producer: producer('general.remark'),
+        producer: transformLanguage(producer('general.remark')),
       }),
     },
     tale: {
       ...(label('general.tale') && {
-        label: transformLanguage({ values: label('general.tale') }),
+        label: transformLanguage(label('general.tale')),
       }),
       ...(producer('general.tale') && {
-        producer: producer('general.tale'),
+        producer: transformLanguage(producer('general.tale')),
       }),
     },
     ...(label('general.barcode') && { barcode: label('general.barcode') }),
@@ -209,13 +223,13 @@ const detailsNormalizer = ({
     },
     style: {
       ...(!isEmpty(label('brewing.style')) && {
-        label: transformLanguage({ values: label('brewing.style') }),
+        label: transformLanguage(label('brewing.style')),
       }),
       ...(!isEmpty(producer('brewing.style')) && {
-        producer: transformLanguage({ values: producer('brewing.style') }),
+        producer: transformLanguage(producer('brewing.style')),
       }),
       ...(!isEmpty(editorial('brewing.style')) && {
-        editorial: transformLanguage({ values: editorial('brewing.style') }),
+        editorial: transformLanguage(editorial('brewing.style')),
       }),
     },
     isDryHopped: {
@@ -277,10 +291,10 @@ const detailsNormalizer = ({
     },
     ingredientsDescription: {
       ...(label('ingredients.description') && {
-        label: label('ingredients.description'),
+        label: transformLanguage(label('ingredients.description')),
       }),
       ...(producer('ingredients.description') && {
-        producer: producer('ingredients.description'),
+        producer: transformLanguage(producer('ingredients.description')),
       }),
     },
     ingredientsList: {
@@ -288,7 +302,7 @@ const detailsNormalizer = ({
         label: label('ingredients.list').map(({ id, badge, name, type }) => ({
           id,
           badge,
-          name,
+          name: transformLanguage(name),
           type,
         })),
       }),
@@ -297,7 +311,7 @@ const detailsNormalizer = ({
           ({ id, badge, name, type }) => ({
             id,
             badge,
-            name,
+            name: transformLanguage(name),
             type,
           }),
         ),

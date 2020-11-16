@@ -5,18 +5,15 @@ import {
   AlcoholUnit,
   Category,
   Clarity,
-  ContainerColor,
-  ContainerMaterial,
-  ContainerType,
-  ContainerUnit,
   ExpirationDateUnit,
   ExtractRelate,
   ExtractUnit,
   Fermentation,
+  HopRateUnit,
   IngredientType,
   TemperatureUnit,
 } from 'beverage/utils/enums';
-import { Aged, Institution, Price, Tale } from './fragments';
+import { Aged, Container, Institution, Price, Tale } from './fragments';
 
 export type Details = {
   id: string;
@@ -38,6 +35,11 @@ export type Details = {
     producer?: Institution;
     editorial?: Institution;
   };
+  isContract?: {
+    label?: boolean;
+    producer?: boolean;
+    editorial?: boolean;
+  };
   place?: {
     label?: {
       city: LanguageValue[];
@@ -51,6 +53,10 @@ export type Details = {
       city: LanguageValue[];
       country: LanguageValue[];
     };
+  };
+  remark?: {
+    label?: LanguageValue[];
+    producer?: LanguageValue[];
   };
   tale?: {
     label?: Tale[];
@@ -130,6 +136,16 @@ export type Details = {
     producer?: Array<LanguageValue[]>;
     editorial?: Array<LanguageValue[]>;
   };
+  hopRate?: {
+    label?: {
+      unit: HopRateUnit;
+      value: number;
+    };
+    producer?: {
+      unit: HopRateUnit;
+      value: number;
+    };
+  };
   expirationDate?: {
     label?: {
       value: number;
@@ -154,10 +170,14 @@ export type Details = {
   };
   ingredientsList?: {
     label?: {
+      id: string;
+      badge: string;
       name: LanguageValue[];
       type: IngredientType;
     }[];
     producer?: {
+      id: string;
+      badge: string;
       name: LanguageValue[];
       type: IngredientType;
     }[];
@@ -204,14 +224,7 @@ export type Details = {
   clarity?: {
     editorial?: Clarity;
   };
-  container: {
-    color: ContainerColor;
-    material: ContainerMaterial;
-    unit: ContainerUnit;
-    type: ContainerType;
-    value: number;
-    hasCapWireFlip?: boolean;
-  };
+  container: Container;
   price?: {
     label?: Price[];
     producer?: Price[];

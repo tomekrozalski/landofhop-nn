@@ -28,10 +28,6 @@ export type Brewing = {
   };
   filtration?: boolean;
   pasteurization?: boolean;
-  hopRate?: {
-    unit: HopRateUnit;
-    value: number;
-  };
   aged?: Aged[];
   style?: LanguageValue[];
   isDryHopped?: boolean;
@@ -39,6 +35,10 @@ export type Brewing = {
     hops: {
       type: Ingredient[];
     };
+  };
+  hopRate?: {
+    unit: HopRateUnit;
+    value: number;
   };
   expirationDate?: {
     value: number;

@@ -1,9 +1,12 @@
 import * as mongoose from 'mongoose';
 
+import { LanguageValue } from 'utils/types';
+import { Tale } from 'beverage/utils/types/fragments';
 import { Language } from 'beverage/utils/types/fragments';
 
+type Values = LanguageValue | Tale;
 type Props = {
-  values: any[];
+  values: Values[];
   languages: Language[];
 };
 

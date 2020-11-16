@@ -1,5 +1,6 @@
 export * from './Aged.type';
 export * from './Brewing.type';
+export * from './Container.type';
 export * from './Impressions.type';
 export * from './Ingredient.type';
 export * from './Ingredients.type';

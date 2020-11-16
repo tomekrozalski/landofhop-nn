@@ -1,16 +1,9 @@
 import { LanguageValue } from 'utils/types';
-import {
-  AlcoholScope,
-  Clarity,
-  ContainerColor,
-  ContainerMaterial,
-  ContainerType,
-  ContainerUnit,
-  Fermentation,
-} from 'beverage/utils/enums';
+import { AlcoholScope, Clarity, Fermentation } from 'beverage/utils/enums';
 import {
   Aged,
   Brewing,
+  Container,
   Impressions,
   Ingredient,
   Ingredients,
@@ -32,21 +25,16 @@ export type RawData = {
       brand: Institution;
       cooperation?: Institution[];
       contract?: Institution;
+      isContract?: boolean;
       place?: Place;
+      remark?: LanguageValue[];
       tale?: Tale[];
       barcode?: string;
     };
     brewing?: Brewing;
     ingredients?: Ingredients;
     impressions?: Impressions;
-    container: {
-      color: ContainerColor;
-      material: ContainerMaterial;
-      unit: ContainerUnit;
-      type: ContainerType;
-      value: number;
-      hasCapWireFlip?: boolean;
-    };
+    container: Container;
     price?: Price[];
   };
   producer?: {
@@ -55,7 +43,9 @@ export type RawData = {
       brand?: Institution;
       cooperation?: Institution[];
       contract?: Institution;
+      isContract?: boolean;
       place?: Place;
+      remark?: LanguageValue[];
       tale?: Tale[];
     };
     brewing?: Brewing;
@@ -67,6 +57,7 @@ export type RawData = {
     general?: {
       cooperation?: Institution[];
       contract?: Institution;
+      isContract?: boolean;
       place?: Place;
     };
     brewing?: {
