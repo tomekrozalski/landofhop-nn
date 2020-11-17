@@ -18,8 +18,8 @@ export class GetDetailsService {
     @InjectModel('Beverage') private readonly beverageModel: Model<Details>,
   ) {}
 
-  async getDetails(id): Promise<AugmentedDetails> {
-    const rawBeverages: RawData[] = await this.beverageModel.getDetails(id);
+  async getDetails(props): Promise<AugmentedDetails> {
+    const rawBeverages: RawData[] = await this.beverageModel.getDetails(props);
     const formattedDetails: Details = detailsNormalizer({
       beverage: rawBeverages[0],
       transformLanguageIds: true,
@@ -28,7 +28,9 @@ export class GetDetailsService {
     const rawBasics: RawBasicsData[] = await this.beverageModel.getBasics({});
     const basics: Basics[] = rawBasics.map(normalizeBasics);
     const selectedBasics: Basics = basics.find(
-      props => Types.ObjectId(props.id).toString() === id,
+      props =>
+        Types.ObjectId(props.id).toString() ===
+        Types.ObjectId(formattedDetails.id).toString(),
     );
     const index = basics.indexOf(selectedBasics);
 

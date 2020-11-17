@@ -7,11 +7,17 @@ import { GetDetailsService } from './getDetails.service';
 export class GetDetailsController {
   constructor(private readonly beverageService: GetDetailsService) {}
 
-  @Get('details/:id')
-  async getDetails(@Param('id') id): Promise<AugmentedDetails> {
-    const beverage: AugmentedDetails = await this.beverageService.getDetails(
-      id,
-    );
+  @Get('details/:shortId/:brand/:name')
+  async getDetails(
+    @Param('shortId') shortId,
+    @Param('brand') brand,
+    @Param('name') name,
+  ): Promise<AugmentedDetails> {
+    const beverage: AugmentedDetails = await this.beverageService.getDetails({
+      shortId,
+      brand,
+      name,
+    });
     return beverage;
   }
 }
