@@ -26,7 +26,11 @@ import producerSchema from './producer';
 // import getAllBeveragesDetails from 'beverage/prefetch/getAllBeveragesDetails/getAllBeveragesDetails.query';
 
 // Static
-import { getBasicsQuery } from 'beverage/static/getBasics';
+import {
+  getBasicsQuery,
+  getNextBasicsQuery,
+  getPreviousBasicsQuery,
+} from 'beverage/static/getBasics';
 import { getDetailsQuery } from 'beverage/static/getDetails';
 
 // Public
@@ -84,6 +88,8 @@ beverageSchema.index({ badge: 1, shortId: 1 }, { unique: true });
 // Static
 beverageSchema.statics.getBasics = getBasicsQuery;
 beverageSchema.statics.getDetails = getDetailsQuery;
+beverageSchema.statics.getNextBasics = getNextBasicsQuery;
+beverageSchema.statics.getPreviousBasics = getPreviousBasicsQuery;
 
 // Public
 // beverageSchema.statics.search = search;

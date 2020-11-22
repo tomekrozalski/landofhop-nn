@@ -25,19 +25,20 @@ export class GetDetailsService {
       transformLanguageIds: true,
     });
 
-    const rawBasics: RawBasicsData[] = await this.beverageModel.getBasics({});
-    const basics: Basics[] = rawBasics.map(normalizeBasics);
-    const selectedBasics: Basics = basics.find(
-      props =>
-        Types.ObjectId(props.id).toString() ===
-        Types.ObjectId(formattedDetails.id).toString(),
+    const rawPreviousBasics: RawBasicsData[] = await this.beverageModel.getPreviousBasics(
+      formattedDetails.id,
     );
-    const index = basics.indexOf(selectedBasics);
+
+    const rawNextBasics: RawBasicsData[] = await this.beverageModel.getNextBasics(
+      formattedDetails.id,
+    );
 
     return {
-      previous: index ? basics[index - 1] : null,
+      previous: rawPreviousBasics.length
+        ? normalizeBasics(rawPreviousBasics[0])
+        : null,
       details: formattedDetails,
-      next: index !== basics.length - 1 ? basics[index + 1] : null,
+      next: rawNextBasics.length ? normalizeBasics(rawNextBasics[0]) : null,
     };
   }
 }
