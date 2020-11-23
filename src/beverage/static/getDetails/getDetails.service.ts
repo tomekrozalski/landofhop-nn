@@ -26,11 +26,11 @@ export class GetDetailsService {
     });
 
     const rawPreviousBasics: RawBasicsData[] = await this.beverageModel.getPreviousBasics(
-      formattedDetails.id,
+      formattedDetails.added,
     );
 
     const rawNextBasics: RawBasicsData[] = await this.beverageModel.getNextBasics(
-      formattedDetails.id,
+      formattedDetails.added,
     );
 
     return {

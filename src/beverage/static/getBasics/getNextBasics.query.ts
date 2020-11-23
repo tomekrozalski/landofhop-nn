@@ -1,15 +1,13 @@
-import * as mongoose from 'mongoose';
-
 import { languages } from 'utils/aggregation';
 import { institution } from 'beverage/utils/aggregation';
 import { RawData } from './rawData.type';
 
-const getNextBasics = function(id: string): RawData[] {
+const getNextBasics = function(added: string): RawData[] {
   return this.aggregate([
     {
       $match: {
-        _id: {
-          $gt: mongoose.Types.ObjectId(id),
+        added: {
+          $gt: added,
         },
       },
     },
