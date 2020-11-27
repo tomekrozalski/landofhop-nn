@@ -17,7 +17,7 @@ import {
   Aged,
   Container,
   DryHopped,
-  IngredientDescription,
+  IngredientsDescription,
   Institution,
   Price,
   Tale,
@@ -165,8 +165,8 @@ export type Details = {
     };
   };
   ingredientsDescription?: {
-    label?: IngredientDescription[];
-    producer?: IngredientDescription[];
+    label?: IngredientsDescription[];
+    producer?: IngredientsDescription[];
   };
   ingredientsList?: {
     label?: {

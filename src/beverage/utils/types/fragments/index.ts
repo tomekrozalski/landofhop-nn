@@ -5,7 +5,7 @@ export * from './DryHopped.type';
 export * from './Impressions.type';
 export * from './Ingredient.type';
 export * from './Ingredients.type';
-export * from './IngredientDescription.type';
+export * from './IngredientsDescription.type';
 export * from './Institution.type';
 export * from './Language.type';
 export * from './Place.type';
