@@ -12,12 +12,15 @@ export class GetBasicsService {
     @InjectModel('Beverage') private readonly beverageModel: Model<Basics>,
   ) {}
 
-  async getBasics({ limit, skip }): Promise<Basics[]> {
+  async getBasics({ language, limit, skip }): Promise<Basics[]> {
     const rawBeverages: RawData[] = await this.beverageModel.getBasics({
       limit,
       skip,
     });
-    const formattedBeverages: Basics[] = rawBeverages.map(normalize);
+
+    const formattedBeverages: Basics[] = rawBeverages.map(beverage =>
+      normalize({ beverage, language }),
+    );
 
     return formattedBeverages;
   }

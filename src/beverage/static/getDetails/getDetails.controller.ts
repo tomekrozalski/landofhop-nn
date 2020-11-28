@@ -7,13 +7,15 @@ import { GetDetailsService } from './getDetails.service';
 export class GetDetailsController {
   constructor(private readonly beverageService: GetDetailsService) {}
 
-  @Get('details/:shortId/:brand/:name')
+  @Get('details/:language/:shortId/:brand/:name')
   async getDetails(
+    @Param('language') language,
     @Param('shortId') shortId,
     @Param('brand') brand,
     @Param('name') name,
   ): Promise<AugmentedDetails> {
     const beverage: AugmentedDetails = await this.beverageService.getDetails({
+      language,
       shortId,
       brand,
       name,

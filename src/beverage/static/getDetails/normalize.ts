@@ -2,51 +2,36 @@ import { get, isBoolean, isEmpty, isNumber, unset } from 'lodash';
 
 import { LanguageValue } from 'utils/types';
 import { Details, RawData } from 'beverage/utils/types';
+import { languageIdToCode } from 'beverage/utils/helpers';
 import { Tale } from 'beverage/utils/types/fragments';
-import languageIdToCode from './languageIdToCode';
 
-const detailsNormalizer = ({
+const normalize = ({
   beverage,
-  transformLanguageIds,
+  language,
 }: {
   beverage: RawData;
-  transformLanguageIds: boolean;
-}): Details => {
-  const transformLanguage = (values: LanguageValue[] | Tale[]) => {
-    if (transformLanguageIds) {
-      return languageIdToCode({
-        languages: beverage.languages,
-        values,
-      });
-    }
+  language: string;
+}): any => {
+  const transformLanguage = (values: LanguageValue[] | Tale[]) =>
+    languageIdToCode({
+      languages: beverage.languages,
+      values,
+    });
 
-    return values;
+  const translate = (
+    values: LanguageValue[] | Tale[],
+    options?: { strict?: boolean },
+  ) => {
+    const formatted = transformLanguage(values);
+
+    return options?.strict
+      ? formatted.find(item => item?.language === language)
+      : formatted.find(item => item?.language === language) || formatted[0];
   };
 
   const label = query => get(beverage, `label.${query}`);
   const producer = query => get(beverage, `producer.${query}`);
   const editorial = query => get(beverage, `editorial.${query}`);
-
-  const normalizeBrand = institution => ({
-    badge: institution.badge,
-    id: institution.id,
-    name: transformLanguage(institution.name),
-    shortId: institution.shortId,
-    ...(institution.website && { website: institution.website }),
-    ...(institution.consortium && {
-      consortium: institution.consortium,
-    }),
-  });
-
-  const normalizePlace = place => ({
-    ...(place.city && { city: transformLanguage(place.city) }),
-    ...(place.coordinates && {
-      coordinates: place.coordinates.map(item => +item),
-    }),
-    country: transformLanguage(place.country.name),
-    id: place.id,
-    institution: transformLanguage(place.institution.name),
-  });
 
   const normalizeExtract = ({ relate, unit, value }) => ({
     relate,
@@ -65,7 +50,7 @@ const detailsNormalizer = ({
     id: beverage.id,
     shortId: beverage.shortId,
     badge: beverage.badge,
-    name: transformLanguage(label('general.name')),
+    name: translate(label('general.name')),
     series: {
       ...(label('general.series') && {
         label: transformLanguage(label('general.series')),
@@ -74,27 +59,38 @@ const detailsNormalizer = ({
         producer: transformLanguage(producer('general.series')),
       }),
     },
-    brand: normalizeBrand(label('general.brand')),
+    brand: {
+      badge: label('general.brand.badge'),
+      name: translate(label('general.brand.name')),
+      ...(label('general.brand.consortium') && {
+        consortium: translate(label('general.brand.consortium')),
+      }),
+      shortId: label('general.brand.shortId'),
+    },
     cooperation: {
       ...(!isEmpty(label('general.cooperation')) && {
-        label: label('general.cooperation').map(normalizeBrand),
+        label: label('general.cooperation').map(({ name }) => translate(name)),
       }),
       ...(!isEmpty(producer('general.cooperation')) && {
-        producer: producer('general.cooperation').map(normalizeBrand),
+        producer: producer('general.cooperation').map(({ name }) =>
+          translate(name),
+        ),
       }),
       ...(!isEmpty(editorial('general.cooperation')) && {
-        editorial: editorial('general.cooperation').map(normalizeBrand),
+        editorial: editorial('general.cooperation').map(({ name }) =>
+          translate(name),
+        ),
       }),
     },
     contract: {
       ...(!isEmpty(label('general.contract')) && {
-        label: normalizeBrand(label('general.contract')),
+        label: translate(label('general.contract.name')),
       }),
       ...(!isEmpty(producer('general.contract')) && {
-        producer: normalizeBrand(producer('general.contract')),
+        producer: translate(producer('general.contract.name')),
       }),
       ...(!isEmpty(editorial('general.contract')) && {
-        editorial: normalizeBrand(editorial('general.contract')),
+        editorial: translate(editorial('general.contract.name')),
       }),
     },
     isContract: {
@@ -110,29 +106,38 @@ const detailsNormalizer = ({
     },
     place: {
       ...(label('general.place.city') && {
-        label: normalizePlace(label('general.place')),
+        label: {
+          city: translate(label('general.place.city')),
+          country: translate(label('general.place.country.name')),
+        },
       }),
       ...(producer('general.place.city') && {
-        producer: normalizePlace(producer('general.place')),
+        producer: {
+          city: translate(producer('general.place.city')),
+          country: translate(producer('general.place.country.name')),
+        },
       }),
       ...(editorial('general.place.city') && {
-        editorial: normalizePlace(editorial('general.place')),
+        editorial: {
+          city: translate(editorial('general.place.city')),
+          country: translate(editorial('general.place.country.name')),
+        },
       }),
     },
     remark: {
       ...(label('general.remark') && {
-        label: transformLanguage(label('general.remark')),
+        label: translate(label('general.remark')),
       }),
       ...(producer('general.remark') && {
-        producer: transformLanguage(producer('general.remark')),
+        producer: translate(producer('general.remark')),
       }),
     },
     tale: {
       ...(label('general.tale') && {
-        label: transformLanguage(label('general.tale')),
+        label: translate(label('general.tale')),
       }),
       ...(producer('general.tale') && {
-        producer: transformLanguage(producer('general.tale')),
+        producer: translate(producer('general.tale')),
       }),
     },
     ...(label('general.barcode') && { barcode: label('general.barcode') }),
@@ -242,28 +247,18 @@ const detailsNormalizer = ({
     },
     dryHopped: {
       ...(!isEmpty(label('brewing.dryHopped.hops')) && {
-        label: label('brewing.dryHopped.hops').map(({ id, name, type }) => ({
-          id,
-          name,
-          type,
-        })),
+        label: label('brewing.dryHopped.hops').map(({ name }) =>
+          translate(name),
+        ),
       }),
       ...(!isEmpty(producer('brewing.dryHopped.hops')) && {
-        producer: producer('brewing.dryHopped.hops').map(
-          ({ id, name, type }) => ({
-            id,
-            name,
-            type,
-          }),
+        producer: producer('brewing.dryHopped.hops').map(({ name }) =>
+          translate(name),
         ),
       }),
       ...(!isEmpty(editorial('brewing.dryHopped.hops')) && {
-        editorial: editorial('brewing.dryHopped.hops').map(
-          ({ id, name, type }) => ({
-            id,
-            name,
-            type,
-          }),
+        editorial: editorial('brewing.dryHopped.hops').map(({ name }) =>
+          translate(name),
         ),
       }),
     },
@@ -291,30 +286,26 @@ const detailsNormalizer = ({
     },
     ingredientsDescription: {
       ...(label('ingredients.description') && {
-        label: transformLanguage(label('ingredients.description')),
+        label: translate(label('ingredients.description'), { strict: true }),
       }),
       ...(producer('ingredients.description') && {
-        producer: transformLanguage(producer('ingredients.description')),
+        producer: translate(producer('ingredients.description'), {
+          strict: true,
+        }),
       }),
     },
     ingredientsList: {
       ...(!isEmpty(label('ingredients.list')) && {
-        label: label('ingredients.list').map(({ id, badge, name, type }) => ({
-          id,
-          badge,
-          name: transformLanguage(name),
+        label: label('ingredients.list').map(({ name, type }) => ({
+          name: translate(name),
           type,
         })),
       }),
       ...(!isEmpty(producer('ingredients.list')) && {
-        producer: producer('ingredients.list').map(
-          ({ id, badge, name, type }) => ({
-            id,
-            badge,
-            name: transformLanguage(name),
-            type,
-          }),
-        ),
+        producer: producer('ingredients.list').map(({ name, type }) => ({
+          name: translate(name),
+          type,
+        })),
       }),
     },
     smokedMalt: {
@@ -426,15 +417,15 @@ const detailsNormalizer = ({
     },
     photos: {
       ...(editorial('photos.cap') && { cap: true }),
-      ...(editorial('photos.cover') && { cover: editorial('photos.cover') }),
       ...(editorial('photos.gallery') && {
         gallery: editorial('photos.gallery'),
       }),
-      ...(editorial('photos.outlines') && {
-        outlines: editorial('photos.outlines'),
+      ...(editorial('photos.outlines.gallery') && {
+        outlines: {
+          gallery: editorial('photos.outlines.gallery'),
+        },
       }),
     },
-    ...(editorial('notes') && { notes: editorial('notes') }),
     added: beverage.added,
     ...(beverage.updated && { updated: beverage.updated }),
   };
@@ -487,4 +478,4 @@ const detailsNormalizer = ({
   return formattedObject;
 };
 
-export default detailsNormalizer;
+export default normalize;

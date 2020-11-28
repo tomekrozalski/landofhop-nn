@@ -1,16 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, Types } from 'mongoose';
+import { Model } from 'mongoose';
 
-import {
-  AugmentedDetails,
-  Basics,
-  Details,
-  RawData,
-} from 'beverage/utils/types';
-import { detailsNormalizer } from 'beverage/utils/helpers';
+import { AugmentedDetails, Details, RawData } from 'beverage/utils/types';
 import { RawData as RawBasicsData } from 'beverage/static/getBasics/rawData.type';
 import normalizeBasics from 'beverage/static/getBasics/normalize';
+import normalize from './normalize';
 
 @Injectable()
 export class GetDetailsService {
@@ -18,11 +13,21 @@ export class GetDetailsService {
     @InjectModel('Beverage') private readonly beverageModel: Model<Details>,
   ) {}
 
-  async getDetails(props): Promise<AugmentedDetails> {
-    const rawBeverages: RawData[] = await this.beverageModel.getDetails(props);
-    const formattedDetails: Details = detailsNormalizer({
+  async getDetails({
+    language,
+    shortId,
+    brand,
+    name,
+  }): Promise<AugmentedDetails> {
+    const rawBeverages: RawData[] = await this.beverageModel.getBeverage({
+      shortId,
+      brand,
+      name,
+    });
+
+    const formattedDetails: Details = normalize({
       beverage: rawBeverages[0],
-      transformLanguageIds: true,
+      language,
     });
 
     const rawPreviousBasics: RawBasicsData[] = await this.beverageModel.getPreviousBasics(
@@ -35,10 +40,12 @@ export class GetDetailsService {
 
     return {
       previous: rawPreviousBasics.length
-        ? normalizeBasics(rawPreviousBasics[0])
+        ? normalizeBasics({ beverage: rawPreviousBasics[0], language })
         : null,
       details: formattedDetails,
-      next: rawNextBasics.length ? normalizeBasics(rawNextBasics[0]) : null,
+      next: rawNextBasics.length
+        ? normalizeBasics({ beverage: rawNextBasics[0], language })
+        : null,
     };
   }
 }

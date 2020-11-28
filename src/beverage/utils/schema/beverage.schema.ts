@@ -31,7 +31,9 @@ import {
   getNextBasicsQuery,
   getPreviousBasicsQuery,
 } from 'beverage/static/getBasics';
-import { getDetailsQuery } from 'beverage/static/getDetails';
+
+// Mixed
+import getBeverageQuery from './getBeverage.query';
 
 // Public
 // import search from 'beverage/public/search/search.query';
@@ -87,9 +89,11 @@ beverageSchema.index({ badge: 1, shortId: 1 }, { unique: true });
 
 // Static
 beverageSchema.statics.getBasics = getBasicsQuery;
-beverageSchema.statics.getDetails = getDetailsQuery;
 beverageSchema.statics.getNextBasics = getNextBasicsQuery;
 beverageSchema.statics.getPreviousBasics = getPreviousBasicsQuery;
+
+// Miced
+beverageSchema.statics.getBeverage = getBeverageQuery;
 
 // Public
 // beverageSchema.statics.search = search;

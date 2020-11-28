@@ -1,29 +1,45 @@
 import { isEmpty, unset } from 'lodash';
 
+import { LanguageValue } from 'utils/types';
 import { Basics } from 'beverage/utils/types';
 import { languageIdToCode } from 'beverage/utils/helpers';
 import { RawData } from './rawData.type';
 
-const normalize = ({
-  added,
-  badge,
-  brand,
-  container,
-  id,
-  languages,
-  name,
-  photos,
-  shortId,
-}: RawData): Basics => {
+type Props = {
+  beverage: RawData;
+  language: string;
+};
+
+const normalize = ({ beverage, language }: Props): Basics => {
+  const {
+    added,
+    badge,
+    brand,
+    container,
+    id,
+    languages,
+    name,
+    photos,
+    shortId,
+  } = beverage;
+
+  const transformLanguage = (values: LanguageValue[]) =>
+    languageIdToCode({ languages, values });
+
+  const translate = (values: LanguageValue[]) => {
+    const formatted = transformLanguage(values);
+    return formatted.find(item => item?.language === language) || formatted[0];
+  };
+
   const formatted = {
     id,
     shortId,
     badge,
     brand: {
       badge: brand.badge,
-      name: languageIdToCode({ languages, values: brand.name }),
+      name: translate(brand.name),
     },
-    name: languageIdToCode({ languages, values: name }),
+    name: translate(name),
     photos,
     container,
     added,

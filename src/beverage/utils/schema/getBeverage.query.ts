@@ -1,5 +1,3 @@
-import * as mongoose from 'mongoose';
-
 import { languages } from 'utils/aggregation';
 import { RawData } from 'beverage/utils/types';
 import { institution, ingredient, place } from 'beverage/utils/aggregation';
@@ -11,11 +9,7 @@ type Props = {
   shortId: string;
 };
 
-const getAllBeveragesDetails = function({
-  shortId,
-  brand,
-  name,
-}: Props): RawData[] {
+const getBeverage = function({ shortId, brand, name }: Props): RawData[] {
   return this.aggregate([
     ...institution,
     ...place,
@@ -45,4 +39,4 @@ const getAllBeveragesDetails = function({
   ]);
 };
 
-export default getAllBeveragesDetails;
+export default getBeverage;

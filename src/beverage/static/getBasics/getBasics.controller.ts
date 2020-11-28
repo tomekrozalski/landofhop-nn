@@ -7,12 +7,14 @@ import { GetBasicsService } from './getBasics.service';
 export class GetBasicsController {
   constructor(private readonly beverageService: GetBasicsService) {}
 
-  @Get('basics/:skip?/:limit?')
+  @Get('basics/:language/:skip?/:limit?')
   async getBasics(
+    @Param('language') language,
     @Param('limit') limit,
     @Param('skip') skip,
   ): Promise<Basics[]> {
     const beverages: Basics[] = await this.beverageService.getBasics({
+      language,
       limit,
       skip,
     });
