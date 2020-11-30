@@ -16,7 +16,8 @@
       "beverage/*": ["src/beverage/*"],
       "ingredient/*": ["src/ingredient/*"],
       "language/*": ["src/language/*"],
-      "place/*": ["src/place/*"]
+      "place/*": ["src/place/*"],
+      "user/*": ["src/user/*"]
     }
   },
   "exclude": ["node_modules", "dist"]
