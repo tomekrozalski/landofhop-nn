@@ -1,18 +1,18 @@
 import * as mongoose from 'mongoose';
 
 import { LanguageValue } from 'utils/types';
+import { Code } from 'language/getCodes/code';
 import { Tale } from 'beverage/utils/types/fragments';
-import { Language } from 'beverage/utils/types/fragments';
 
 type Values = LanguageValue | Tale;
 type Props = {
   values: Values[];
-  languages: Language[];
+  languageList: Code[];
 };
 
-const languageIdToCode = ({ languages, values }: Props) =>
+const languageIdToCode = ({ languageList, values }: Props) =>
   values.map(({ language, ...rest }: any) => {
-    const code = languages.find(
+    const code = languageList.find(
       ({ id }) =>
         mongoose.Types.ObjectId(id).toString() ===
         mongoose.Types.ObjectId(language).toString(),

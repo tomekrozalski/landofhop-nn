@@ -1,6 +1,7 @@
 import { isEmpty, unset } from 'lodash';
 
 import { LanguageValue } from 'utils/types';
+import { Code } from 'language/getCodes/code';
 import { Basics } from 'beverage/utils/types';
 import { languageIdToCode } from 'beverage/utils/helpers';
 import { RawData } from './rawData.type';
@@ -8,23 +9,23 @@ import { RawData } from './rawData.type';
 type Props = {
   beverage: RawData;
   language: string;
+  languageList: Code[];
 };
 
-const normalize = ({ beverage, language }: Props): Basics => {
+const normalize = ({ beverage, language, languageList }: Props): Basics => {
   const {
     added,
     badge,
     brand,
     container,
     id,
-    languages,
     name,
     photos,
     shortId,
   } = beverage;
 
   const transformLanguage = (values: LanguageValue[]) =>
-    languageIdToCode({ languages, values });
+    languageIdToCode({ languageList, values });
 
   const translate = (values: LanguageValue[]) => {
     const formatted = transformLanguage(values);

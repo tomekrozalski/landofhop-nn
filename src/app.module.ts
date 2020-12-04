@@ -14,7 +14,7 @@ import { BeverageModule } from './beverage/beverage.module';
 // import { InstitutionModule } from './institution/institution.module';
 // import { PlaceModule } from './place/place.module';
 import { CountryModule } from './country/country.module';
-// import { LanguageModule } from './language/language.module';
+import { LanguageModule } from './language/language.module';
 
 @Module({
   imports: [
@@ -24,7 +24,7 @@ import { CountryModule } from './country/country.module';
     // InstitutionModule,
     // PlaceModule,
     CountryModule,
-    // LanguageModule,
+    LanguageModule,
     ConfigModule.forRoot(),
     MongooseModule.forRoot(
       `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@landofhop-ku9ye.mongodb.net/landofhop?retryWrites=true`,

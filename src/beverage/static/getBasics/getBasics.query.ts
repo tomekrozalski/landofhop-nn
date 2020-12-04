@@ -1,4 +1,3 @@
-import { languages } from 'utils/aggregation';
 import { institution } from 'beverage/utils/aggregation';
 import { RawData } from './rawData.type';
 
@@ -10,7 +9,6 @@ type Props = {
 const getBasics = function({ limit, skip }: Props): RawData[] {
   return this.aggregate([
     ...institution,
-    ...languages,
     {
       $project: {
         _id: 0,
@@ -35,7 +33,6 @@ const getBasics = function({ limit, skip }: Props): RawData[] {
           type: '$label.container.type',
         },
         added: 1,
-        languages: 1,
       },
     },
     { $sort: { added: -1 } },

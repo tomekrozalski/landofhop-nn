@@ -8,7 +8,6 @@ import {
   Ingredient,
   Ingredients,
   Institution,
-  Language,
   Place,
   Price,
   Tale,
@@ -97,5 +96,4 @@ export type RawData = {
   };
   added: Date;
   updated?: Date;
-  languages: Language[];
 };

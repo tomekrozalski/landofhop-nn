@@ -7,13 +7,13 @@ import {
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { User } from 'user/utils/types';
+import { User } from 'user/types';
 
 @Injectable()
-export class UserService {
+export class LoginService {
   constructor(@InjectModel('User') private readonly userModel: Model<User>) {}
 
-  async logIn({ email, password }: User) {
+  async login({ email, password }: User) {
     const {
       status,
       message,
@@ -22,7 +22,7 @@ export class UserService {
       status: number;
       message: string;
       token?: string;
-    } = await this.userModel.logIn({ email, password });
+    } = await this.userModel.login({ email, password });
 
     switch (status) {
       case 200:

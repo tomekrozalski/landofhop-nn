@@ -5,7 +5,6 @@ export * from './Impressions.type';
 export * from './Ingredient.type';
 export * from './Ingredients.type';
 export * from './Institution.type';
-export * from './Language.type';
 export * from './Place.type';
 export * from './Price.type';
 export * from './Tale.type';

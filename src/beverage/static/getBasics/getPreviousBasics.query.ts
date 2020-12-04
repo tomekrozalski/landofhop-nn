@@ -1,4 +1,3 @@
-import { languages } from 'utils/aggregation';
 import { institution } from 'beverage/utils/aggregation';
 import { RawData } from './rawData.type';
 
@@ -14,7 +13,6 @@ const getPreviousBasics = function(added: string): RawData[] {
     { $sort: { added: -1 } },
     { $limit: 1 },
     ...institution,
-    ...languages,
     {
       $project: {
         _id: 0,
@@ -39,7 +37,6 @@ const getPreviousBasics = function(added: string): RawData[] {
           type: '$label.container.type',
         },
         added: 1,
-        languages: 1,
       },
     },
   ]);

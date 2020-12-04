@@ -1,6 +1,5 @@
 import { LanguageValue } from 'utils/types';
 import { ContainerType } from 'beverage/utils/enums';
-import { Language } from 'beverage/utils/types/fragments';
 
 export type RawData = {
   id: string;
@@ -24,5 +23,4 @@ export type RawData = {
     type: ContainerType;
   };
   added: Date;
-  languages: Language[];
 };

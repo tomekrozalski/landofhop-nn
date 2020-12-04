@@ -1,20 +1,21 @@
 import { get, isBoolean, isEmpty, isNumber, unset } from 'lodash';
 
 import { LanguageValue } from 'utils/types';
+import { Code } from 'language/getCodes/code';
 import { Details, RawData } from 'beverage/utils/types';
 import { languageIdToCode } from 'beverage/utils/helpers';
 import { Tale } from 'beverage/utils/types/fragments';
 
-const normalize = ({
-  beverage,
-  language,
-}: {
+type Props = {
   beverage: RawData;
   language: string;
-}): any => {
+  languageList: Code[];
+};
+
+const normalize = ({ beverage, language, languageList }: Props): Details => {
   const transformLanguage = (values: LanguageValue[] | Tale[]) =>
     languageIdToCode({
-      languages: beverage.languages,
+      languageList,
       values,
     });
 

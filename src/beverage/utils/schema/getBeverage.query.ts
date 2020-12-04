@@ -1,4 +1,3 @@
-import { languages } from 'utils/aggregation';
 import { RawData } from 'beverage/utils/types';
 import { institution, ingredient, place } from 'beverage/utils/aggregation';
 import { editorial, label, producer } from 'beverage/utils/project';
@@ -14,7 +13,6 @@ const getBeverage = function({ shortId, brand, name }: Props): RawData[] {
     ...institution,
     ...place,
     ...ingredient,
-    ...languages,
     {
       $match: {
         badge: name,
@@ -33,7 +31,6 @@ const getBeverage = function({ shortId, brand, name }: Props): RawData[] {
         ...{ editorial },
         added: 1,
         updated: 1,
-        languages: 1,
       },
     },
   ]);

@@ -1,17 +1,17 @@
 import { Body, Controller, Post } from '@nestjs/common';
 
-import { UserService } from './user.service';
+import { LoginService } from './login.service';
 
 @Controller('auth')
-export class UserController {
-  constructor(private readonly UserService: UserService) {}
+export class LoginController {
+  constructor(private readonly userService: LoginService) {}
 
   @Post()
-  async logIn(
+  async login(
     @Body('email') email: string,
     @Body('password') password: string,
   ) {
-    const response: { token: string } = await this.UserService.logIn({
+    const response: { token: string } = await this.userService.login({
       email,
       password,
     });

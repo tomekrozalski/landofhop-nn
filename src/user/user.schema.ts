@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 
-import logIn from 'user/login.query';
+import { loginQuery } from 'user/login';
 
 const userSchema = new mongoose.Schema(
   {
@@ -17,6 +17,6 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.index({ email: 1 }, { unique: true });
-userSchema.statics.logIn = logIn;
+userSchema.statics.login = loginQuery;
 
 export default userSchema;

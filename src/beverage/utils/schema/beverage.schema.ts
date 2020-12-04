@@ -31,6 +31,7 @@ import {
   getNextBasicsQuery,
   getPreviousBasicsQuery,
 } from 'beverage/static/getBasics';
+import { getDataForStatsQuery } from 'beverage/static/getDataForStats';
 
 // Mixed
 import getBeverageQuery from './getBeverage.query';
@@ -91,6 +92,7 @@ beverageSchema.index({ badge: 1, shortId: 1 }, { unique: true });
 beverageSchema.statics.getBasics = getBasicsQuery;
 beverageSchema.statics.getNextBasics = getNextBasicsQuery;
 beverageSchema.statics.getPreviousBasics = getPreviousBasicsQuery;
+beverageSchema.statics.getDataForStats = getDataForStatsQuery;
 
 // Miced
 beverageSchema.statics.getBeverage = getBeverageQuery;
