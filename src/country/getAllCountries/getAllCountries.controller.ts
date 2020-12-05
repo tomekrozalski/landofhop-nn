@@ -1,6 +1,6 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 
-import { Country } from '../types';
+import { Country } from 'country/utils/types';
 import { GetAllCountriesService } from './getAllCountries.service';
 
 @Controller('country')

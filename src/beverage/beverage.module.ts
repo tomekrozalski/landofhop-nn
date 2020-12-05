@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import BeverageSchema from './utils/schema';
-import LanguageSchema from 'language/language.schema';
+import LanguageSchema from 'language/utils/language.schema';
 
 // import {
 //   AddNewBeverageController,

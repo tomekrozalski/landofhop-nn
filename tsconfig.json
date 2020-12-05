@@ -4,6 +4,7 @@
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
+    "moduleResolution": "node",
     "experimentalDecorators": true,
     "target": "es2017",
     "sourceMap": true,
@@ -12,12 +13,13 @@
     "incremental": true,
     "rootDir": ".",
     "paths": {
-      "utils/*": ["src/utils/*"],
       "beverage/*": ["src/beverage/*"],
+      "country/*": ["src/country/*"],
       "ingredient/*": ["src/ingredient/*"],
       "language/*": ["src/language/*"],
       "place/*": ["src/place/*"],
-      "user/*": ["src/user/*"]
+      "user/*": ["src/user/*"],
+      "utils/*": ["src/utils/*"]
     }
   },
   "exclude": ["node_modules", "dist"]

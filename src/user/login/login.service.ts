@@ -7,7 +7,7 @@ import {
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { User } from 'user/types';
+import { User } from 'user/utils/User';
 
 @Injectable()
 export class LoginService {

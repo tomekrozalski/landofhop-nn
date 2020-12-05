@@ -1,4 +1,4 @@
-import { Code } from './code.d';
+import { Code } from 'language/utils/types';
 
 const getCodesQuery = function(): Code[] {
   return this.aggregate([

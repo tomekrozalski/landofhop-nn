@@ -1,4 +1,4 @@
-import { Code } from 'language/getCodes/code';
+import { Code } from 'language/utils/types';
 import { RawData } from '../rawData.d';
 import formatBeverageData from './formatBeverageData';
 import { addTimeline } from './createDataForCharts';

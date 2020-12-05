@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import LanguageSchema from 'language/language.schema';
+import LanguageSchema from 'language/utils/language.schema';
 import { GetCodesController, GetCodesService } from './getCodes';
 
 @Module({

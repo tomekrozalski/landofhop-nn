@@ -1,5 +1,5 @@
 import { institution } from 'beverage/utils/aggregation';
-import { RawData } from './rawData.type';
+import { RawData } from './RawData';
 
 type Props = {
   limit?: string;

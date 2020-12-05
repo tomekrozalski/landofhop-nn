@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 
 import { langValue } from 'utils/schema';
-import { getAllCountriesQuery } from './getAllCountries';
+import { getAllCountriesQuery } from 'country/getAllCountries';
 
 const countrySchema = new mongoose.Schema({
   code: {

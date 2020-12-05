@@ -1,7 +1,7 @@
 import { get, isBoolean, isEmpty, isNumber, unset } from 'lodash';
 
 import { LanguageValue } from 'utils/types';
-import { Code } from 'language/getCodes/code';
+import { Code } from 'language/utils/types';
 import { Details, RawData } from 'beverage/utils/types';
 import { languageIdToCode } from 'beverage/utils/helpers';
 import { Tale } from 'beverage/utils/types/fragments';

@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 
+import { Code } from 'language/utils/types';
 import { GetCodesService } from './getCodes.service';
-import { Code } from './code.d';
 
 @Controller('language')
 export class GetCodesController {

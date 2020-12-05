@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 
 import { LanguageValue } from 'utils/types';
-import { Code } from 'language/getCodes/code';
+import { Code } from 'language/utils/types';
 import { Tale } from 'beverage/utils/types/fragments';
 
 type Values = LanguageValue | Tale;

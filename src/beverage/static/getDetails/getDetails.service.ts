@@ -2,10 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { Language } from 'language/types';
-import { Code } from 'language/getCodes/code';
+import { Language } from 'language/utils/types';
+import { Code } from 'language/utils/types';
 import { AugmentedDetails, Details, RawData } from 'beverage/utils/types';
-import { RawData as RawBasicsData } from 'beverage/static/getBasics/rawData.type';
+import { RawData as RawBasicsData } from 'beverage/static/getBasics/RawData';
 import normalizeBasics from 'beverage/static/getBasics/normalize';
 import normalize from './normalize';
 

@@ -1,5 +1,5 @@
 import { institution } from 'beverage/utils/aggregation';
-import { RawData } from './rawData.d';
+import { RawData } from './RawData';
 
 const getDataForStats = function(): RawData[] {
   return this.aggregate([

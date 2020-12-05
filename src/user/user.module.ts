@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import UserSchema from 'user/user.schema';
+import UserSchema from 'user/utils/user.schema';
 import { LoginController, LoginService } from 'user/login';
 
 @Module({

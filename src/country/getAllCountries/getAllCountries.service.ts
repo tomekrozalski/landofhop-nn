@@ -1,8 +1,8 @@
+import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
 
-import { Country } from '../types';
+import { Country } from 'country/utils/types';
 
 @Injectable()
 export class GetAllCountriesService {

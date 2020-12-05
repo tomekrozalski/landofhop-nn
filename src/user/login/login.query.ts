@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 
-import { User } from 'user/types';
+import { User } from 'user/utils/User';
 
 const logIn = function({
   email,

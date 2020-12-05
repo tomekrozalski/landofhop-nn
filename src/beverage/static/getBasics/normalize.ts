@@ -1,10 +1,10 @@
 import { isEmpty, unset } from 'lodash';
 
 import { LanguageValue } from 'utils/types';
-import { Code } from 'language/getCodes/code';
+import { Code } from 'language/utils/types';
 import { Basics } from 'beverage/utils/types';
 import { languageIdToCode } from 'beverage/utils/helpers';
-import { RawData } from './rawData.type';
+import { RawData } from './RawData';
 
 type Props = {
   beverage: RawData;

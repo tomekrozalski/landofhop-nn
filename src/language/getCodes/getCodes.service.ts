@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { Language } from 'language/types';
-import { Code } from './code.d';
+import { Code, Language } from 'language/utils/types';
 
 @Injectable()
 export class GetCodesService {

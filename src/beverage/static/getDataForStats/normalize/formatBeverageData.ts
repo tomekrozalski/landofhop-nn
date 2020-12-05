@@ -1,9 +1,9 @@
 import { isEmpty, unset } from 'lodash';
 
-import { Code } from 'language/getCodes/code';
-import { RawData } from '../rawData.d';
-import { languageIdToCode } from 'beverage/utils/helpers';
 import { LanguageValue } from 'utils/types';
+import { languageIdToCode } from 'beverage/utils/helpers';
+import { Code } from 'language/utils/types';
+import { RawData } from '../RawData.d';
 
 const normalizeAlcohol = alcohol => ({
   ...(alcohol.relate && { relate: alcohol.relate }),

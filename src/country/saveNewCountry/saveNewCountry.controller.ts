@@ -1,7 +1,6 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 
 import { AuthGuard } from 'utils/guards';
-import { Country } from '../types';
 import { SaveNewCountryService } from './saveNewCountry.service';
 
 @Controller('country')

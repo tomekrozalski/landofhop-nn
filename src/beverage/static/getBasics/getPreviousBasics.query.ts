@@ -1,5 +1,5 @@
 import { institution } from 'beverage/utils/aggregation';
-import { RawData } from './rawData.type';
+import { RawData } from './RawData';
 
 const getPreviousBasics = function(added: string): RawData[] {
   return this.aggregate([

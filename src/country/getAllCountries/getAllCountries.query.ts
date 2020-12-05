@@ -1,4 +1,4 @@
-import { Country } from '../types';
+import { Country } from 'country/utils/types';
 
 const getAllCountriesQuery = function(): Country[] {
   return this.aggregate([

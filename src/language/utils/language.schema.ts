@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 
 import { langValue } from 'utils/schema';
-import { getCodesQuery } from './getCodes';
+import { getCodesQuery } from 'language/getCodes';
 
 const languageSchema = new mongoose.Schema({
   code: {
