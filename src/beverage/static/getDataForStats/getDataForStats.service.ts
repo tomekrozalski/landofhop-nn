@@ -5,7 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { DataForStats, Details } from 'beverage/utils/types';
 import { Language } from 'language/utils/types';
 import { Code } from 'language/utils/types';
-import { RawData } from './rawData.d';
+import { RawData } from './RawData';
 import normalize from './normalize';
 
 @Injectable()

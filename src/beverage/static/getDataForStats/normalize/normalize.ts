@@ -1,6 +1,6 @@
 import { AddTimeline, DataForStats } from 'beverage/utils/types';
 import { Code } from 'language/utils/types';
-import { RawData } from '../rawData.d';
+import { RawData } from '../RawData';
 import formatBeverageData from './formatBeverageData';
 import { addTimeline } from './createDataForCharts';
 import { FormattedBeverage } from './FormattedBeverage';

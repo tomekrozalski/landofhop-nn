@@ -3,7 +3,7 @@ import { isEmpty } from 'lodash';
 import { LanguageValue } from 'utils/types';
 import { languageIdToCode } from 'beverage/utils/helpers';
 import { Code } from 'language/utils/types';
-import { RawData } from '../RawData.d';
+import { RawData } from '../RawData';
 import { FormattedBeverage } from './FormattedBeverage';
 
 const normalizeAlcohol = alcohol => ({
