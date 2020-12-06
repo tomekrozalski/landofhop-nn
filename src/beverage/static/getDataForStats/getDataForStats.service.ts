@@ -2,7 +2,7 @@ import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
-import { Details } from 'beverage/utils/types';
+import { DataForStats, Details } from 'beverage/utils/types';
 import { Language } from 'language/utils/types';
 import { Code } from 'language/utils/types';
 import { RawData } from './rawData.d';
@@ -15,11 +15,11 @@ export class GetDataForStatsService {
     @InjectModel('Beverage') private readonly beverageModel: Model<Details>,
   ) {}
 
-  async getDataForStats({ language }): Promise<RawData[]> {
+  async getDataForStats({ language }): Promise<DataForStats> {
     const rawBeverages: RawData[] = await this.beverageModel.getDataForStats();
     const languageList: Code[] = await this.getCodesModel.getCodes();
 
-    const data: any = normalize({
+    const data: DataForStats = normalize({
       language,
       languageList,
       values: rawBeverages,

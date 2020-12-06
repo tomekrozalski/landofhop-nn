@@ -1,7 +1,9 @@
+import { AddTimeline, DataForStats } from 'beverage/utils/types';
 import { Code } from 'language/utils/types';
 import { RawData } from '../rawData.d';
 import formatBeverageData from './formatBeverageData';
 import { addTimeline } from './createDataForCharts';
+import { FormattedBeverage } from './FormattedBeverage';
 
 type Props = {
   language: string;
@@ -9,14 +11,14 @@ type Props = {
   values: RawData[];
 };
 
-const normalize = ({ language, languageList, values }: Props) => {
-  const formattedValues = values.map(
+const normalize = ({ language, languageList, values }: Props): DataForStats => {
+  const formattedValues: FormattedBeverage[] = values.map(
     formatBeverageData({ language, languageList }),
   );
 
-  const a = addTimeline(formattedValues);
+  const addTimelineData: AddTimeline[] = addTimeline(formattedValues);
 
-  return { a, formattedValues };
+  return { addTimelineData };
 };
 
 export default normalize;

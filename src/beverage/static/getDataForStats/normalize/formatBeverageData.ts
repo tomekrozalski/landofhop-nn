@@ -1,9 +1,10 @@
-import { isEmpty, unset } from 'lodash';
+import { isEmpty } from 'lodash';
 
 import { LanguageValue } from 'utils/types';
 import { languageIdToCode } from 'beverage/utils/helpers';
 import { Code } from 'language/utils/types';
 import { RawData } from '../RawData.d';
+import { FormattedBeverage } from './FormattedBeverage';
 
 const normalizeAlcohol = alcohol => ({
   ...(alcohol.relate && { relate: alcohol.relate }),
@@ -24,52 +25,60 @@ const formatBeverageData = ({
 }: {
   language: string;
   languageList: Code[];
-}) => (item: RawData) => {
-  const formattedItem = { ...item };
-
+}) => ({
+  added,
+  alcohol,
+  brand,
+  container,
+  extract,
+  fermentation,
+  id,
+}: RawData): FormattedBeverage => {
   const transformLanguage = (values: LanguageValue[]) =>
     languageIdToCode({
       languageList,
       values,
     });
 
-  const translate = (values: LanguageValue[]) => {
+  const translate = (values: LanguageValue[]): LanguageValue => {
     const formatted = transformLanguage(values);
 
     return formatted.find(item => item?.language === language) || formatted[0];
   };
 
-  formattedItem.brand.name = translate(formattedItem.brand.name);
-
-  ['label', 'producer', 'editorial'].forEach(part => {
-    if (formattedItem.alcohol[part]) {
-      formattedItem.alcohol[part] = normalizeAlcohol(
-        formattedItem.alcohol[part],
-      );
-    }
-  });
-
-  ['label', 'producer'].forEach(part => {
-    if (formattedItem.extract[part]) {
-      formattedItem.extract[part] = normalizeExtract(
-        formattedItem.extract[part],
-      );
-    }
-  });
-
-  if (isEmpty(item.alcohol)) {
-    unset(formattedItem, 'alcohol');
-  }
-
-  if (isEmpty(item.extract)) {
-    unset(formattedItem, 'extract');
-  }
-
-  if (isEmpty(item.fermentation)) {
-    unset(formattedItem, 'fermentation');
-  }
-
-  return formattedItem;
+  return {
+    added,
+    ...(!isEmpty(alcohol) && {
+      alcohol: {
+        ...(alcohol.label && {
+          label: normalizeAlcohol(alcohol.label),
+        }),
+        ...(alcohol.producer && {
+          producer: normalizeAlcohol(alcohol.producer),
+        }),
+        ...(alcohol.editorial && {
+          editorial: normalizeAlcohol(alcohol.editorial),
+        }),
+      },
+    }),
+    id,
+    brand: {
+      id: brand.id,
+      name: translate(brand.name),
+    },
+    ...(!isEmpty(extract) && {
+      extract: {
+        ...(extract.label && {
+          label: normalizeExtract(extract.label),
+        }),
+        ...(extract.producer && {
+          producer: normalizeExtract(extract.producer),
+        }),
+      },
+    }),
+    ...(!isEmpty(fermentation) && { fermentation }),
+    container,
+  };
 };
 
 export default formatBeverageData;
