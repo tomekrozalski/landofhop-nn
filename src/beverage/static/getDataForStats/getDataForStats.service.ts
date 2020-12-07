@@ -2,7 +2,8 @@ import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
-import { DataForStats, Details } from 'beverage/utils/types';
+import { Details } from 'beverage/utils/types';
+import { DataForStats } from 'beverage/utils/types/DataForStats';
 import { Language } from 'language/utils/types';
 import { Code } from 'language/utils/types';
 import { RawData } from './RawData';

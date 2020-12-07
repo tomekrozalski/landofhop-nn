@@ -1,7 +1,7 @@
 import { add, format, isBefore, max, min } from 'date-fns';
 
 import { ContainerType as ContainerTypeEnum } from 'beverage/utils/enums';
-import { AddTimeline } from 'beverage/utils/types';
+import { AddTimeline } from 'beverage/utils/types/DataForStats';
 import { FormattedBeverage } from '../FormattedBeverage';
 
 const addTimeline = (values: FormattedBeverage[]): AddTimeline[] => {

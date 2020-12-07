@@ -1,6 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
 
-import { DataForStats } from 'beverage/utils/types';
+import { DataForStats } from 'beverage/utils/types/DataForStats';
 import { GetDataForStatsService } from './getDataForStats.service';
 
 @Controller('beverage')

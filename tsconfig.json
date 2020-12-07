@@ -12,6 +12,7 @@
     "baseUrl": "./",
     "incremental": true,
     "rootDir": ".",
+    "lib": ["es2019"],
     "paths": {
       "beverage/*": ["src/beverage/*"],
       "country/*": ["src/country/*"],
