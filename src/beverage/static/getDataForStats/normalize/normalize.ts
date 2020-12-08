@@ -1,10 +1,10 @@
 import {
-  AddTimeline,
-  Alcohol,
-  DataForStats,
-  FermentationTimeline,
-  TopBrandsTimeline,
-} from 'beverage/utils/types/DataForStats';
+  AddTimelineBar,
+  AlcoholChartBar,
+  FermentationTimelineBar,
+  Stats,
+  TopBrandsTimelineBar,
+} from 'beverage/utils/types';
 import { Code } from 'language/utils/types';
 import { RawData } from '../RawData';
 import formatBeverageData from './formatBeverageData';
@@ -22,17 +22,17 @@ type Props = {
   values: RawData[];
 };
 
-const normalize = ({ language, languageList, values }: Props): DataForStats => {
+const normalize = ({ language, languageList, values }: Props): Stats => {
   const formattedValues: FormattedBeverage[] = values.map(
     formatBeverageData({ language, languageList }),
   );
 
-  const addTimelineData: AddTimeline[] = addTimeline(formattedValues);
-  const alcoholChartData: Alcohol[] = alcoholChart(formattedValues);
-  const fermentationTimelineData: FermentationTimeline[] = fermentationTimeline(
+  const addTimelineData: AddTimelineBar[] = addTimeline(formattedValues);
+  const alcoholChartData: AlcoholChartBar[] = alcoholChart(formattedValues);
+  const fermentationTimelineData: FermentationTimelineBar[] = fermentationTimeline(
     formattedValues,
   );
-  const topBrandsTimelineData: TopBrandsTimeline[] = topBrandsTimeline({
+  const topBrandsTimelineData: TopBrandsTimelineBar[] = topBrandsTimeline({
     values: formattedValues,
     limit: 10,
   });

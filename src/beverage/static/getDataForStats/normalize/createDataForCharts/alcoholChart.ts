@@ -1,9 +1,9 @@
 import { isNumber, round } from 'lodash';
 
-import { Alcohol } from 'beverage/utils/types/DataForStats';
+import { AlcoholChartBar } from 'beverage/utils/types';
 import { FormattedBeverage } from '../FormattedBeverage';
 
-const alcoholChart = (values: FormattedBeverage[]): Alcohol[] => {
+const alcoholChart = (values: FormattedBeverage[]): AlcoholChartBar[] => {
   const alcoholValues = values
     .map(({ alcohol }) => {
       const label = alcohol?.label?.value;
@@ -22,11 +22,7 @@ const alcoholChart = (values: FormattedBeverage[]): Alcohol[] => {
     })
     .filter(val => isNumber(val)) as number[];
 
-  const domain: {
-    beverages: number;
-    value: number;
-  }[] = [];
-
+  const domain: AlcoholChartBar[] = [];
   const max = Math.max(...alcoholValues) + 1;
 
   for (let value = 0; value <= max; value = round(value + 0.1, 1)) {

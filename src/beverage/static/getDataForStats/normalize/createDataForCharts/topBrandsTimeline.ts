@@ -1,7 +1,7 @@
 import { add, format, isBefore, max, min } from 'date-fns';
 
 import { LanguageValue } from 'utils/types';
-import { TopBrandsTimeline } from 'beverage/utils/types/DataForStats';
+import { TopBrandsTimelineBar } from 'beverage/utils/types';
 import { FormattedBeverage } from '../FormattedBeverage';
 
 type Props = {
@@ -34,8 +34,11 @@ const getTopBrands = ({ limit, values }: Props) => {
     .slice(0, limit);
 };
 
-const topBrandsTimeline = ({ limit, values }: Props): TopBrandsTimeline[] => {
-  const domain: TopBrandsTimeline[] = [];
+const topBrandsTimeline = ({
+  limit,
+  values,
+}: Props): TopBrandsTimelineBar[] => {
+  const domain: TopBrandsTimelineBar[] = [];
   const dates = values.map(({ added }) => new Date(added));
   const earliest = min(dates);
   const latest = max(dates);

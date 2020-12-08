@@ -1,11 +1,11 @@
 import { add, format, isBefore, max, min } from 'date-fns';
 
 import { ContainerType as ContainerTypeEnum } from 'beverage/utils/enums';
-import { AddTimeline } from 'beverage/utils/types/DataForStats';
+import { AddTimelineBar } from 'beverage/utils/types';
 import { FormattedBeverage } from '../FormattedBeverage';
 
-const addTimeline = (values: FormattedBeverage[]): AddTimeline[] => {
-  const domain: AddTimeline[] = [];
+const addTimeline = (values: FormattedBeverage[]): AddTimelineBar[] => {
+  const domain: AddTimelineBar[] = [];
   const dates = values.map(({ added }) => new Date(added));
   const earliest = min(dates);
   const latest = max(dates);
