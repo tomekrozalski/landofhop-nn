@@ -9,6 +9,7 @@ const getDataForStats = function(): RawData[] {
         _id: 0,
         id: '$_id',
         brand: {
+          badge: '$label.general.brand_info.badge',
           id: '$label.general.brand_info._id',
           name: '$label.general.brand_info.name',
         },

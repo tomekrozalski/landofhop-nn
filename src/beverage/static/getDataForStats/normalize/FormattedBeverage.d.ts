@@ -12,6 +12,7 @@ import {
 export type FormattedBeverage = {
   id: string;
   brand: {
+    badge: string;
     id: string;
     name: LanguageValue;
   };

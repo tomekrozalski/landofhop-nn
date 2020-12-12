@@ -13,6 +13,7 @@ const getTopBrands = ({ limit, values }: Props) => {
   type AccType = {
     [name: string]: {
       amount: number;
+      badge: string;
       id: string;
       name: LanguageValue;
     };

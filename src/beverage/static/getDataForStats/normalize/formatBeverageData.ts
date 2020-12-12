@@ -1,3 +1,4 @@
+import * as mongoose from 'mongoose';
 import { isEmpty } from 'lodash';
 
 import { LanguageValue } from 'utils/types';
@@ -61,9 +62,10 @@ const formatBeverageData = ({
         }),
       },
     }),
-    id,
+    id: mongoose.Types.ObjectId(id).toString(),
     brand: {
-      id: brand.id,
+      ...brand,
+      id: mongoose.Types.ObjectId(brand.id).toString(),
       name: translate(brand.name),
     },
     ...(!isEmpty(extract) && {
