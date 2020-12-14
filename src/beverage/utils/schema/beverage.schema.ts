@@ -4,9 +4,8 @@ import editorialSchema from './editorial';
 import labelSchema from './label';
 import producerSchema from './producer';
 
-// ------------- STATICS -------------
 // Admin
-// import getLastTiles from 'beverage/admin/getLastTiles/getLastTiles.query';
+import { getAdminDetailsQuery } from 'beverage/admin/getAdminDetails';
 // import getDetails from 'beverage/admin/getDetails/getDetails.query';
 // import getBrandById from 'beverage/admin/addNewBeverage/getBrandById.query';
 // import getImagesData from 'beverage/admin/getImagesData/getImagesData.query';
@@ -69,7 +68,7 @@ const beverageSchema = new mongoose.Schema(
 beverageSchema.index({ badge: 1, shortId: 1 }, { unique: true });
 
 // Admin
-// beverageSchema.statics.getLastTiles = getLastTiles;
+beverageSchema.statics.getAdminDetails = getAdminDetailsQuery;
 // beverageSchema.statics.getDetails = getDetails;
 // beverageSchema.statics.getBrandById = getBrandById;
 // beverageSchema.statics.getImagesData = getImagesData;
