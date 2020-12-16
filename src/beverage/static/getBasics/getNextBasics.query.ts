@@ -1,7 +1,7 @@
 import { institution } from 'beverage/utils/aggregation';
 import { RawData } from './RawData';
 
-const getNextBasics = function(added: string): RawData[] {
+const getNextBasics = function(added: string, id: string): RawData[] {
   return this.aggregate([
     {
       $match: {
@@ -10,6 +10,7 @@ const getNextBasics = function(added: string): RawData[] {
         },
       },
     },
+    { $sort: { added: 1 } },
     { $limit: 1 },
     ...institution,
     {
