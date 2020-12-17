@@ -12,6 +12,9 @@ import { getAdminDetailsQuery } from 'beverage/admin/getAdminDetails';
 // import getPatchById from 'beverage/admin/updateBeverage/getPatchById.query';
 // import update from 'beverage/admin/updateBeverage/update.query';
 
+// Dynamic
+import { searchQuery } from 'beverage/dynamic/search';
+
 // Images
 // import saveCap from 'beverage/images/cap/saveCap.query';
 // import removeCap from 'beverage/images/cap/removeCap.query';
@@ -74,6 +77,9 @@ beverageSchema.statics.getAdminDetails = getAdminDetailsQuery;
 // beverageSchema.statics.getImagesData = getImagesData;
 // beverageSchema.statics.getPatchById = getPatchById;
 // beverageSchema.statics.update = update;
+
+// Dynamic
+beverageSchema.statics.search = searchQuery;
 
 // Images
 // beverageSchema.statics.saveCap = saveCap;

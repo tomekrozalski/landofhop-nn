@@ -18,6 +18,7 @@ import {
   //   UpdateBeverageController,
   //   UpdateBeverageService,
 } from './admin';
+import { SearchBeverageController, SearchBeverageService } from './dynamic';
 import {
   GetBasicsController,
   GetBasicsService,
@@ -43,6 +44,7 @@ import { GetCodesController, GetCodesService } from 'language/getCodes';
     GetDataForStatsController,
     GetDetailsController,
     GetTotalController,
+    SearchBeverageController,
   ],
   providers: [
     GetAdminDetailsService,
@@ -51,6 +53,7 @@ import { GetCodesController, GetCodesService } from 'language/getCodes';
     GetDataForStatsService,
     GetDetailsService,
     GetTotalService,
+    SearchBeverageService,
   ],
 })
 export class BeverageModule {}
