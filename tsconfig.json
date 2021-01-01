@@ -17,6 +17,7 @@
       "beverage/*": ["src/beverage/*"],
       "country/*": ["src/country/*"],
       "ingredient/*": ["src/ingredient/*"],
+      "institution/*": ["src/institution/*"],
       "language/*": ["src/language/*"],
       "place/*": ["src/place/*"],
       "user/*": ["src/user/*"],

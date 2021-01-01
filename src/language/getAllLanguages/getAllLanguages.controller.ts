@@ -6,12 +6,12 @@ import { GetAllLanguagesService } from './getAllLanguages.service';
 
 @Controller('language')
 export class GetAllLanguagesController {
-  constructor(private readonly getCodesService: GetAllLanguagesService) {}
+  constructor(private readonly languageService: GetAllLanguagesService) {}
 
   @Get('getAll')
   @UseGuards(AuthGuard)
   async getAllLanguages() {
-    const response: Language[] = await this.getCodesService.getAllLanguages();
+    const response: Language[] = await this.languageService.getAllLanguages();
 
     return response;
   }
