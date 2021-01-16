@@ -3,6 +3,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 import InstitutionSchema from 'institution/utils/institution.schema';
 import {
+  AddNewInstitutionController,
+  AddNewInstitutionService,
+} from './addNewInstitution';
+import {
   GetAllInstitutionsController,
   GetAllInstitutionsService,
 } from './getAllInstitutions';
@@ -13,7 +17,7 @@ import {
       { name: 'Institution', schema: InstitutionSchema },
     ]),
   ],
-  controllers: [GetAllInstitutionsController],
-  providers: [GetAllInstitutionsService],
+  controllers: [AddNewInstitutionController, GetAllInstitutionsController],
+  providers: [AddNewInstitutionService, GetAllInstitutionsService],
 })
 export class InstitutionModule {}
