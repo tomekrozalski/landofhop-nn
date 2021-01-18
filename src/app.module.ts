@@ -12,7 +12,7 @@ import { UserModule } from './user/user.module';
 import { BeverageModule } from './beverage/beverage.module';
 // import { IngredientModule } from './ingredient/ingredient.module';
 import { InstitutionModule } from './institution/institution.module';
-// import { PlaceModule } from './place/place.module';
+import { PlaceModule } from './place/place.module';
 import { CountryModule } from './country/country.module';
 import { LanguageModule } from './language/language.module';
 
@@ -22,7 +22,7 @@ import { LanguageModule } from './language/language.module';
     BeverageModule,
     // IngredientModule,
     InstitutionModule,
-    // PlaceModule,
+    PlaceModule,
     CountryModule,
     LanguageModule,
     ConfigModule.forRoot(),
