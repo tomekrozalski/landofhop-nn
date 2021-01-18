@@ -7,7 +7,7 @@ import { GetAllCountriesService } from './getAllCountries.service';
 export class GetAllCountriesController {
   constructor(private readonly countryService: GetAllCountriesService) {}
 
-  @Get()
+  @Get('getAll')
   async getAllCountries() {
     const countries: Country[] = await this.countryService.getAllCountries();
     return countries;

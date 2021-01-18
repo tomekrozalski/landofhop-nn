@@ -1,26 +1,28 @@
+import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
 
 import { Country } from 'country/utils/types';
 
 @Injectable()
-export class SaveNewCountryService {
+export class AddNewCountryService {
   constructor(
     @InjectModel('Country')
     private readonly countryModel: Model<Country>,
   ) {}
 
-  async saveCountry({ code, name }) {
+  async addNewCountry({ code, name }) {
     const newCountry = new this.countryModel({
       code,
-      name: name.map(({ lang, value }) => ({
-        ...(lang !== 'none' && { language: lang }),
+      name: name.map(({ language, value }) => ({
+        ...(language !== 'none' && { language }),
         value,
       })),
     });
 
     await newCountry.save();
-    return true;
+
+    const updatedCountries = await this.countryModel.getAllCountries();
+    return updatedCountries;
   }
 }
