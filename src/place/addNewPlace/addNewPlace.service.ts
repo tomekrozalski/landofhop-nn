@@ -1,4 +1,5 @@
 import { Model } from 'mongoose';
+import { isNumber } from 'lodash';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
@@ -27,8 +28,8 @@ export class AddNewPlaceService {
       country,
       institution,
       shortId,
-      ...(latitude &&
-        longitude && {
+      ...(isNumber(latitude) &&
+        isNumber(longitude) && {
           location: {
             type: 'Point',
             coordinates: [latitude, longitude],
