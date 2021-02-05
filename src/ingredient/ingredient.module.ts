@@ -3,6 +3,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 import IngredientSchema from 'ingredient/utils/ingredient.schema';
 import {
+  AddNewIngredientController,
+  AddNewIngredientService,
+} from './addNewIngredient';
+import {
   GetAllIngredientsController,
   GetAllIngredientsService,
 } from './getAllIngredients';
@@ -13,7 +17,7 @@ import {
       { name: 'Ingredient', schema: IngredientSchema },
     ]),
   ],
-  controllers: [GetAllIngredientsController],
-  providers: [GetAllIngredientsService],
+  controllers: [AddNewIngredientController, GetAllIngredientsController],
+  providers: [AddNewIngredientService, GetAllIngredientsService],
 })
 export class IngredientModule {}
