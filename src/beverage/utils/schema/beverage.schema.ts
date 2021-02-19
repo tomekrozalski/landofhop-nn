@@ -7,7 +7,7 @@ import producerSchema from './producer';
 // Admin
 import { getAdminDetailsQuery } from 'beverage/admin/getAdminDetails';
 // import getDetails from 'beverage/admin/getDetails/getDetails.query';
-// import getBrandById from 'beverage/admin/addNewBeverage/getBrandById.query';
+import getBrandById from 'beverage/admin/addNewBeverage/getBrandById.query';
 // import getImagesData from 'beverage/admin/getImagesData/getImagesData.query';
 // import getPatchById from 'beverage/admin/updateBeverage/getPatchById.query';
 // import update from 'beverage/admin/updateBeverage/update.query';
@@ -73,7 +73,7 @@ beverageSchema.index({ badge: 1, shortId: 1 }, { unique: true });
 // Admin
 beverageSchema.statics.getAdminDetails = getAdminDetailsQuery;
 // beverageSchema.statics.getDetails = getDetails;
-// beverageSchema.statics.getBrandById = getBrandById;
+beverageSchema.statics.getBrandById = getBrandById;
 // beverageSchema.statics.getImagesData = getImagesData;
 // beverageSchema.statics.getPatchById = getPatchById;
 // beverageSchema.statics.update = update;

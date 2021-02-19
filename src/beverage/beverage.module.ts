@@ -5,6 +5,8 @@ import BeverageSchema from './utils/schema';
 import LanguageSchema from 'language/utils/language.schema';
 
 import {
+  AddNewBeverageController,
+  AddNewBeverageService,
   GetAdminDetailsController,
   GetAdminDetailsService,
   //   GetDetailsController,
@@ -38,6 +40,7 @@ import { GetCodesController, GetCodesService } from 'language/getCodes';
     MongooseModule.forFeature([{ name: 'Beverage', schema: BeverageSchema }]),
   ],
   controllers: [
+    AddNewBeverageController,
     GetAdminDetailsController,
     GetCodesController,
     GetBasicsController,
@@ -47,6 +50,7 @@ import { GetCodesController, GetCodesService } from 'language/getCodes';
     SearchBeverageController,
   ],
   providers: [
+    AddNewBeverageService,
     GetAdminDetailsService,
     GetCodesService,
     GetBasicsService,

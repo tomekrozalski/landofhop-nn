@@ -1,6 +1,15 @@
 import {
+  AddNewBeverageController,
+  AddNewBeverageService,
+} from './addNewBeverage';
+import {
   GetAdminDetailsController,
   GetAdminDetailsService,
 } from './getAdminDetails';
 
-export { GetAdminDetailsController, GetAdminDetailsService };
+export {
+  AddNewBeverageController,
+  AddNewBeverageService,
+  GetAdminDetailsController,
+  GetAdminDetailsService,
+};
