@@ -1,3 +1,5 @@
+import getSize from './getSize';
+import getWidth from './getWidth';
 import languageIdToCode from './languageIdToCode';
 
-export { languageIdToCode };
+export { getSize, getWidth, languageIdToCode };

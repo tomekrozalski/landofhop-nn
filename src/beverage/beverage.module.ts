@@ -15,8 +15,8 @@ import {
   //   GetImagesDataService,
   //   GetLastTilesController,
   //   GetLastTilesService,
-  //   RemoveBeverageController,
-  //   RemoveBeverageService,
+  RemoveBeverageController,
+  RemoveBeverageService,
   //   UpdateBeverageController,
   //   UpdateBeverageService,
 } from './admin';
@@ -47,6 +47,7 @@ import { GetCodesController, GetCodesService } from 'language/getCodes';
     GetDataForStatsController,
     GetDetailsController,
     GetTotalController,
+    RemoveBeverageController,
     SearchBeverageController,
   ],
   providers: [
@@ -57,6 +58,7 @@ import { GetCodesController, GetCodesService } from 'language/getCodes';
     GetDataForStatsService,
     GetDetailsService,
     GetTotalService,
+    RemoveBeverageService,
     SearchBeverageService,
   ],
 })
