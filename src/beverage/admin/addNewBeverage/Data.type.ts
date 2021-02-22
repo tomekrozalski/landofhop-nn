@@ -198,6 +198,7 @@ export type DataType = {
   remark?: {
     label?: { language?: string; value: string }[];
     producer?: { language?: string; value: string }[];
+    editorial?: { language?: string; value: string }[];
   };
   series?: {
     label?: { language?: string; value: string }[];

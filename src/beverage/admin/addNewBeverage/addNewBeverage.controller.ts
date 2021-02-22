@@ -235,6 +235,7 @@ export class AddNewBeverageController {
     remark: {
       label?: { language?: string; value: string }[];
       producer?: { language?: string; value: string }[];
+      editorial?: { language?: string; value: string }[];
     },
     @Body('series')
     series: {

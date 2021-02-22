@@ -3,12 +3,8 @@ import * as mongoose from 'mongoose';
 const taleSchema = new mongoose.Schema(
   {
     language: {
-      type: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'Language',
-        },
-      ],
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Language',
       required: false,
     },
     lead: {

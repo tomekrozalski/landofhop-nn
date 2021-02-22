@@ -1,5 +1,7 @@
 import * as mongoose from 'mongoose';
 
+import { langValue } from 'utils/schema';
+
 const generalSchema = new mongoose.Schema(
   {
     cooperation: {
@@ -19,6 +21,10 @@ const generalSchema = new mongoose.Schema(
     place: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Place',
+    },
+    remark: {
+      type: [langValue],
+      default: undefined,
     },
   },
   { _id: false },

@@ -115,7 +115,8 @@ const normalize = ({
       contract.editorial ||
       isContract.editorial ||
       cooperation.editorial ||
-      place.editorial,
+      place.editorial ||
+      remark.editorial,
     impressions: color.editorial || clarity.editorial,
   };
 
@@ -276,6 +277,7 @@ const normalize = ({
               cooperation: cooperation.editorial,
             }),
             ...(place.editorial && { place: place.editorial }),
+            ...(remark.editorial && { remark: remark.editorial }),
           },
         }),
         ...(hasEditorial.brewing && {
