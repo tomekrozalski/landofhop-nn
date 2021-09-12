@@ -27,7 +27,7 @@ import { LanguageModule } from './language/language.module';
     LanguageModule,
     ConfigModule.forRoot(),
     MongooseModule.forRoot(
-      `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@landofhop-ku9ye.mongodb.net/landofhop?retryWrites=true`,
+      `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@landofhop.ku9ye.mongodb.net/landofhop?retryWrites=true`,
     ),
   ],
 })
